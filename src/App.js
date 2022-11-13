@@ -1,12 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
-import { SummaryForm } from './pages';
+import { Container } from 'react-bootstrap';
+import { OrderEntry } from './pages';
+import { OrderDetailsProvider } from './context';
 
 function App() {
   return (
-    <div className="App">
-      <SummaryForm />
-    </div>
+    <Container>
+      <OrderDetailsProvider>
+        <OrderEntry />
+      </OrderDetailsProvider>
+    </Container>
   );
 }
 
