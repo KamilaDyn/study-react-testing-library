@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import { useOrderDetails } from '../../context';
 
-const SummaryForm = () => {
+const SummaryForm = ({ setOrderPhase }) => {
   const [checked, setChecked] = useState(false);
-
+  const { totals, optionCounts } = useOrderDetails();
   const popover = (
     <Popover id="popover-basic">
       <Popover.Body>no ice cream will actually be delivered</Popover.Body>
@@ -19,8 +20,12 @@ const SummaryForm = () => {
       </OverlayTrigger>
     </span>
   );
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setOrderPhase('completed');
+  };
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group controlId="terms-and-conditions">
         <Form.Check
           type="checkbox"

@@ -18,4 +18,11 @@ export const handlers = [
       ])
     );
   }),
+
+  rest.post('/order', (req, res) => {
+    return res(
+      // Respond with a 200 status code
+      ctx.status(201)
+    );
+  }),
 ];
