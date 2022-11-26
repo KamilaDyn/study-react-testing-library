@@ -14,15 +14,27 @@ export default function OrderSummary(props) {
     </li>
   ));
 
-  const toppingArray = Object.keys(optionCounts.toppings); //["M&ms", ...]
-  const toppingsList = toppingArray.map((key) => <li key={key}>{key}</li>);
+  const hasToppings = totals.toppings > 0;
+  let toppingDisplay = null;
+
+  if (hasToppings) {
+    const toppingArray = Object.keys(optionCounts.toppings); //["M&ms", ...]
+    const toppingList = toppingArray.map((key) => <li key={key}>{key}</li>);
+
+    toppingDisplay = (
+      <>
+        <h2>Toppings total: {formatCurrency(totals.toppings)}</h2>
+        <ul>{toppingList}</ul>
+      </>
+    );
+  }
+
   return (
     <div>
       <h1>Order Summary</h1>
       <h2>Scoops total: {formatCurrency(totals.scoops)}</h2>
       <ul>{scoopList}</ul>
-      <h2>Toppings total: {formatCurrency(totals.toppings)}</h2>
-      <ul>{toppingsList}</ul>
+      {toppingDisplay}
       <SummaryForm setOrderPhase={setOrderPhase} />
     </div>
   );
